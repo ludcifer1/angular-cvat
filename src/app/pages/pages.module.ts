@@ -6,6 +6,7 @@ import { ImageControllerComponent } from './image-controller/image-controller.co
 import { ImageObjectHolderComponent } from './image-object-holder/image-object-holder.component';
 import { ImageBoxComponent } from './image-box/image-box.component';
 import { ContainerComponent } from './container/container.component';
+import { FakeDataService } from '../services/fakeDataService.service';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ContainerComponent } from './container/container.component';
   ],
   exports: [
     ImageControllerComponent, ImageObjectHolderComponent, ImageBoxComponent, ContainerComponent
-  ]
+  ],
+  providers: [FakeDataService]
 })
 export class PagesModule { }

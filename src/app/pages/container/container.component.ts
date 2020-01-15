@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FakeDataService } from 'src/app/services/fakeDataService.service';
 
 @Component({
   selector: 'app-container',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private fakeDataService: FakeDataService) { }
 
   ngOnInit() {
+    this.fakeDataService.fetchData().subscribe(
+      res => {
+        console.log('res', res);
+
+      }
+    );
   }
 
 }
