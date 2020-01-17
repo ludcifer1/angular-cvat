@@ -20,6 +20,22 @@ export class FakeDataService {
               left: 477,
               width: 85,
               height: 184
+            },
+            {
+              id: 1,
+              category_id: 'xz56wef1e',
+              top: 440,
+              left: 842,
+              width: 83,
+              height: 148
+            },
+            {
+              id: 2,
+              category_id: 'xz56wef1e',
+              top: 435,
+              left: 767,
+              width: 77,
+              height: 148
             }
           ]
         }

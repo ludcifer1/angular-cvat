@@ -29,8 +29,6 @@ export class ImageBoxComponent implements OnInit {
 
     this.fakeDataService.fetchData().subscribe(
       res => {
-        //this.setCanvasDimenson(res.images[0].width, res.images[0].height);
-        // this.calcScale(res.images[0].width, res.images[0].height);
         this.currentImg = res.images[0];
 
         fabric.Image.fromURL(this.imageLink, (oImg) => {
@@ -42,18 +40,15 @@ export class ImageBoxComponent implements OnInit {
           this.resizeImg.scaleToWidth(this.imageOrginalWidth * this.scaleImage);
           this.resizeImg.scaleToHeight(this.imageOrginalHeight * this.scaleImage);
           this.canvas.setBackgroundImage(this.resizeImg, this.canvas.renderAll.bind(this.canvas));
+          const shapeArr = this.currentImg.boxes;
+          shapeArr.map(shape => this.drawRectBox(new CanvasRect(shape)));
         });
       });
-
-    setTimeout(() => {
-      const shapeArr = this.currentImg.boxes;
-      shapeArr.map(shape => this.drawRectBox(new CanvasRect(shape)));
-    }, 300);
-
   }
 
   private drawCanvasBox() {
     this.canvas = new fabric.Canvas('canvas', {
+
     });
   }
 
@@ -74,16 +69,16 @@ export class ImageBoxComponent implements OnInit {
   }
 
   private drawRectBox(shape?: CanvasRect, scale?: number) {
-    this.scaleImage = 0.9375;
     this.shape = new fabric.Rect({
       top: shape.top * this.scaleImage,
       left: shape.left * this.scaleImage,
       width: shape.width * this.scaleImage,
       height: shape.height * this.scaleImage,
       fill: 'transparent',
-      stroke: 'red',
-      strokeWidth: 2
+      stroke: shape.color ? shape.color : 'red',
+      strokeWidth: 1.5
     }).setCoords();
+    this.shape.on('selected', (e) => { console.log(e); });
     this.canvas.add(this.shape);
     // TODO: Add created shape to product boxes arr for furthur mangement
   }
